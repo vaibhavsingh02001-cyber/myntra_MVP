@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'agent1-nudge'
+    metrics_path: '/health'
+    static_configs:
+      - targets: ['agent1-nudge:3001']
+
+  - job_name: 'agent2-fit'
+    metrics_path: '/health'
+    static_configs:
+      - targets: ['agent2-fit:3002']

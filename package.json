@@ -1,0 +1,27 @@
+{
+  "name": "myntra-ai-agent",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "services/agent1-nudge",
+    "services/agent2-fit",
+    "shared"
+  ],
+  "scripts": {
+    "dev:agent1": "npm run dev --workspace=services/agent1-nudge",
+    "dev:agent2": "npm run dev --workspace=services/agent2-fit",
+    "dev:all": "concurrently \"npm:dev:agent1\" \"npm:dev:agent2\"",
+    "test": "jest --passWithNoTests --coverage",
+    "build": "tsc -b",
+    "migrate": "node shared/db/migrate.js",
+    "seed": "ts-node shared/db/seed.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "concurrently": "^8.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

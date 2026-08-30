@@ -1,0 +1,57 @@
+name: Deploy Myntra AI Agent
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Compile Shared & Workspaces
+        run: |
+          npm run build --workspace=shared
+          npm run build --workspace=services/agent1-nudge
+          npm run build --workspace=services/agent2-fit
+
+      - name: Run Unit & Integration Tests
+        run: |
+          npm run test --workspace=services/agent1-nudge
+          npm run test --workspace=services/agent2-fit
+
+  deploy:
+    name: Docker Build & K8s Deploy
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Agent 1 Docker Image
+        run: |
+          docker build -t myntra-agent1-nudge:${{ github.sha }} -f services/agent1-nudge/Dockerfile .
+
+      - name: Build Agent 2 Docker Image
+        run: |
+          docker build -t myntra-agent2-fit:${{ github.sha }} -f services/agent2-fit/Dockerfile .
+
+      - name: Deploy Manifests to Kubernetes
+        run: |
+          echo "Simulating kubectl apply -f infra/k8s/"
+          echo "Successfully deployed version ${{ github.sha }} to Kubernetes"

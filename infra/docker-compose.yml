@@ -1,0 +1,100 @@
+version: '3.9'
+
+services:
+  gateway:
+    image: nginx:alpine
+    container_name: myntra_gateway
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - agent1-nudge
+      - agent2-fit
+
+  agent1-nudge:
+    build:
+      context: ..
+      dockerfile: services/agent1-nudge/Dockerfile
+    container_name: myntra_agent1_nudge
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT_AGENT1=3001
+      - DATABASE_URL=postgresql://admin:secret@postgres:5432/myntra_agent
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://admin:secret@rabbitmq:5672
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  agent2-fit:
+    build:
+      context: ..
+      dockerfile: services/agent2-fit/Dockerfile
+    container_name: myntra_agent2_fit
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT_AGENT2=3002
+      - DATABASE_URL=postgresql://admin:secret@postgres:5432/myntra_agent
+      - REDIS_URL=redis://redis:6379
+      - RABBITMQ_URL=amqp://admin:secret@rabbitmq:5672
+      - GROQ_API_KEY=${GROQ_API_KEY}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:15
+    container_name: myntra_postgres
+    environment:
+      POSTGRES_DB: myntra_agent
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d myntra_agent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: myntra_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: myntra_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: secret
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  postgres_data:

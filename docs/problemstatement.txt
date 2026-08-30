@@ -1,0 +1,98 @@
+PROBLEM STATEMENT — Myntra Wishlist-to-Purchase Conversion
+================================================================
+
+CORE PROBLEM
+
+Myntra's high-intent "Wishlist Hoarders" — repeat buyers (2+ orders/month)
+who add 5+ items to their wishlist but convert less than 10% of them
+within 30 days — don't lack purchase intent; they lack the two things
+that would turn intent into action: the right MOMENT to buy, and the
+CONFIDENCE that the item will actually work for them.
+
+49% cite price/salary-timing uncertainty ("I'll buy when it drops /
+when I get paid") as their #1 reason for not converting.
+24% cite fit and style uncertainty ("will it look like it does on the
+model?") as a recurring blocker.
+
+Because nothing in the app resolves either gap, high-intent demand
+Myntra already owns quietly leaks away every month — to forgetting,
+to waiting, or to the same item bought cheaper on Amazon/Ajio/offline.
+This never shows up as a complaint, so it never shows up as a fix.
+
+----------------------------------------------------------------------
+
+WHY TWO AGENTS
+
+The 49% and the 24% are two different root causes, not one problem
+wearing two faces — so they need two separate mechanisms, not one
+nudge that tries to do both:
+
+1. TIMING gap → users need to be told WHEN to act
+2. CONFIDENCE gap → users need to be told WHETHER it'll work for them
+
+----------------------------------------------------------------------
+
+AGENT 1 — Smart Nudge Agent (Timing)
+
+Problem it solves:
+Wishlisted items sit idle because users have no external trigger to
+revisit them. They rely on themselves to remember to check back —
+and mostly, they don't.
+
+Problem statement:
+"Wishlisted intent has no expiry-aware trigger. Users need to be
+told the RIGHT moment to act — a price drop, a salary-day window, or
+a closing 30-day intent window — instead of relying on themselves to
+remember to check back."
+
+----------------------------------------------------------------------
+
+AGENT 2 — Fit-Confidence Match Agent (Body Type / Style Fit)
+
+Problem it solves:
+Users see a wishlisted item on a model whose body type may not
+resemble theirs, and have no reliable way to know if the fit, cut,
+or style will translate to their own body — so they stall, seek
+opinions outside the app (friends, reviews, other sites), or abandon
+the purchase entirely rather than risk a return.
+
+Problem statement:
+"Users wishlist apparel with genuine intent, but the product image
+only shows fit on the model's body — not theirs. With no way to
+translate 'how it looks on them' into 'how it'll look on me,' users
+default to hesitation, not purchase. This fit-uncertainty is the
+second-largest blocker (24%) to converting saved items, and unlike
+the timing problem, it cannot be solved by nudging — it has to be
+solved by giving the user a personalized, trustworthy answer to
+'will this work for MY body?' before they decide."
+
+Agent 2 core mechanic:
+- Capture a lightweight body-type profile (few guided questions:
+  height range, body shape/type, fit preference — no invasive input,
+  no photo requirement upfront)
+- For each wishlisted item, generate a Fit-Match Score (%) that
+  estimates how well the item's cut/style suits the user's profile,
+  using product attributes (fabric, cut, silhouette) cross-referenced
+  against body-type heuristics
+- Surface this score directly on the wishlist, next to the item —
+  turning a vague "will it suit me?" doubt into a concrete,
+  personalized signal at the exact moment of decision
+
+----------------------------------------------------------------------
+
+COMBINED VALUE
+
+- For the user: removes two separate reasons to hesitate — "not the
+  right time" and "not sure it'll suit me" — without ever discounting
+  the product.
+- For the business: converts already-owned high-intent demand (no
+  CAC spend, no margin hit from discounting) and reduces silent
+  drop-off to competitor platforms where users go to "just double-
+  check" before buying elsewhere.
+
+----------------------------------------------------------------------
+
+ONE-LINE VERSION (for slide title / deck)
+
+"Wishlist demand isn't cold — it's stuck between 'not the right time'
+and 'not sure it'll suit me,' and Myntra never answers either."
