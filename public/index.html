@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myntra — Online Shopping for Women, Men & Kids</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <a href="#" class="logo-container">
+        <span class="logo-icon">M</span>
+        <span class="logo-title">Myntra</span>
+        <span class="logo-badge">AI Agent</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Women</a></li>
+          <li><a href="#">Kids</a></li>
+          <li><a href="#">Home & Living</a></li>
+          <li><a href="#">Beauty</a></li>
+          <li><a href="#" style="color: var(--primary-pink);">Studio <sup>NEW</sup></a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products, brands and more">
+    </div>
+
+    <div class="nav-actions">
+      <div class="action-item" id="btnOpenProfile">
+        <span class="action-icon">👤</span>
+        <span class="action-label">Profile</span>
+      </div>
+      <a href="#wishlist" class="action-item" id="navWishlist">
+        <span class="action-icon">❤️</span>
+        <span class="action-label">Wishlist</span>
+        <span class="badge-count" id="wishlistCount">0</span>
+      </a>
+      <div class="action-item">
+        <span class="action-icon">🛍️</span>
+        <span class="action-label">Bag</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO BANNER -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>Myntra Wishlist-to-Purchase AI Agent System</h1>
+      <p>Powered by Smart Nudge Agent (Timing & Price Drops) & Fit-Confidence Match Agent (Body Profiling & Score Badges)</p>
+    </div>
+    <div class="agent-status-pills">
+      <div class="agent-pill">
+        <span class="dot-green"></span> Agent 1: Smart Nudge Active
+      </div>
+      <div class="agent-pill">
+        <span class="dot-green"></span> Agent 2: Fit-Match Engine Active
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="main-container">
+    <div class="page-header">
+      <h2 class="page-title" id="sectionTitle">Recommended for You</h2>
+      <button class="btn-profile" id="btnUpdateProfile">🎯 Setup Fit Profile</button>
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div class="product-grid" id="productGrid">
+      <!-- Dynamic product cards populated by app.js -->
+    </div>
+  </main>
+
+  <!-- AI AGENT WISHLIST & FIT QUESTIONNAIRE MODAL -->
+  <div class="modal-overlay" id="onboardingModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="agent-avatar-badge">
+          <span class="agent-avatar-icon">🤖</span>
+          <div class="agent-avatar-info">
+            <span class="agent-avatar-title">Myntra AI Wishlist Agent</span>
+            <span class="agent-avatar-sub">Fit-Confidence & Smart Nudge Engine</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+      </div>
+
+      <div class="modal-agent-message" id="modalAgentMessage">
+        <!-- Dynamic message from AI Agent -->
+      </div>
+
+      <div class="modal-body-content">
+        <span class="modal-step-indicator" id="modalStepIndicator">Step 1 of 4</span>
+        <h3 class="modal-question" id="modalQuestion">What's your height range?</h3>
+        <div class="options-list" id="modalOptionsList">
+          <!-- Dynamic options list -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUSH NOTIFICATION TOAST CONTAINER (AGENT 1) -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js?v=4"></script>
+</body>
+</html>
