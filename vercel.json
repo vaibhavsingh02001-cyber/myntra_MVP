@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": null,
+  "installCommand": "echo 'No install step required'",
+  "buildCommand": "echo 'No build step required'",
   "builds": [
     {
       "src": "frontend/**",
