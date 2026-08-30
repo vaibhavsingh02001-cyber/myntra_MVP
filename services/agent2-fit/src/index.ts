@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 // ── CORS & Global Middleware ──────────────────────────────────────────────
-app.use((_req, res, next) => {
+app.use((_req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
@@ -38,7 +38,7 @@ const frontendPath = [
 app.use(express.static(frontendPath));
 
 // ── Health Check ───────────────────────────────────────────────────────────
-app.get('/health', async (_req, res) => {
+app.get('/health', async (_req: express.Request, res: express.Response) => {
   const dbOk = await db.ping();
   const redisOk = await pingRedis();
   const status = dbOk && redisOk ? 'healthy' : 'degraded';
