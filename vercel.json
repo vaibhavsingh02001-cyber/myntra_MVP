@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "node scripts/build.js",
-  "outputDirectory": "public",
+  "outputDirectory": "frontend",
+  "buildCommand": "echo 'Build ready'",
   "rewrites": [
     {
       "source": "/api/(.*)",
