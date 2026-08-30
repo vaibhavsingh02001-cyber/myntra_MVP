@@ -1,27 +1,15 @@
 {
   "version": 2,
-  "builds": [
+  "buildCommand": "node scripts/build.js",
+  "outputDirectory": "public",
+  "rewrites": [
     {
-      "src": "api/index.ts",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
     },
     {
       "source": "/health",
-      "dest": "/api/index.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "destination": "/api/index.ts"
     }
   ]
 }
