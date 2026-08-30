@@ -3,9 +3,10 @@
  * Connects UI to Agent 1 (Smart Nudge) and Agent 2 (Fit-Confidence Match).
  */
 
-const API_BASE = 'http://localhost:3000/api/v1'; // Nginx Gateway or direct fallback
-const AGENT1_BASE = 'http://localhost:3001/api/v1';
-const AGENT2_BASE = 'http://localhost:3002/api/v1';
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE = isLocal ? 'http://localhost:3000/api/v1' : `${window.location.origin}/api/v1`;
+const AGENT1_BASE = isLocal ? 'http://localhost:3001/api/v1' : `${window.location.origin}/api/v1`;
+const AGENT2_BASE = isLocal ? 'http://localhost:3002/api/v1' : `${window.location.origin}/api/v1`;
 
 // Seed Products matching DB seed (7 Products)
 const PRODUCTS = [

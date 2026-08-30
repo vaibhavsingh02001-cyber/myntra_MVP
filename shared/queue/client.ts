@@ -35,12 +35,17 @@ export const queue = {
    * Publish a JSON message to a queue.
    */
   publish: async (queueName: string, payload: object): Promise<boolean> => {
-    const ch = await getChannel();
-    return ch.sendToQueue(
-      queueName,
-      Buffer.from(JSON.stringify(payload)),
-      { persistent: true, contentType: 'application/json' }
-    );
+    try {
+      const ch = await getChannel();
+      return ch.sendToQueue(
+        queueName,
+        Buffer.from(JSON.stringify(payload)),
+        { persistent: true, contentType: 'application/json' }
+      );
+    } catch (err: any) {
+      console.warn(`[Queue] RabbitMQ publish skipped (${err.message})`);
+      return false;
+    }
   },
 
   /**
