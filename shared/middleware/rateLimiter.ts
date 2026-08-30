@@ -1,4 +1,5 @@
 import rateLimit from 'express-rate-limit';
+import { Request, Response } from 'express';
 import { logger } from './logger';
 
 /**
@@ -11,7 +12,7 @@ export const userRateLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req: any) => req.user?.userId || req.ip,
-  handler: (_req, res) => {
+  handler: (_req: Request, res: Response) => {
     logger.warn('Rate limit exceeded');
     res.status(429).json({
       error: 'Too Many Requests',
@@ -29,7 +30,7 @@ export const ipRateLimiter = rateLimit({
   max: 500,
   standardHeaders: true,
   legacyHeaders: false,
-  handler: (_req, res) => {
+  handler: (_req: Request, res: Response) => {
     res.status(429).json({
       error: 'Too Many Requests',
       message: 'IP rate limit exceeded',

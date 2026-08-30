@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
     "dotenv": "^16.4.5",
     "zod": "^3.23.8",
     "pino": "^9.3.2",
